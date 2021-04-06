@@ -1,0 +1,16 @@
+.userName {
+  text-align: center;
+  font-family: fantasy;
+}
+
+.password {
+  text-align: center;
+  font-family: fantasy;
+}
+
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
