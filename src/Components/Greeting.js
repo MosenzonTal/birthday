@@ -6,6 +6,8 @@ function Greeting() {
   const [buyMeClicked, setBuyMeClicked] = useState(false);
   const [cultBeautyClicked, setCultBeautyClicked] = useState(false);
   const [showQuestion, setShowQuestion] = useState(false);
+  const [showQuestion2, setShowQuestion2] = useState(false); // New state for second question
+  const [showQuestion3, setShowQuestion3] = useState(false); // New state for third question
   const [answer, setAnswer] = useState('');
   const [correctAnswer, setCorrectAnswer] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -24,19 +26,13 @@ function Greeting() {
   const handleTicketClick = (ticket) => {
     if (ticket === 'shein' && !sheinClicked) {
       setShowQuestion(prevState => !prevState); // Toggle the showQuestion state
-      return;
-    }
-    switch (ticket) {
-      case 'buyMe':
-        setBuyMeClicked(!buyMeClicked);
-        break;
-      case 'cultBeauty':
-        setCultBeautyClicked(!cultBeautyClicked);
-        break;
-      default:
-        break;
+    } else if (ticket === 'buyMe' && !buyMeClicked) {
+      setShowQuestion2(prevState => !prevState); // Toggle the showQuestion state
+    } else if (ticket === 'cultBeauty' && !cultBeautyClicked) {
+      setShowQuestion3(prevState => !prevState); // Toggle the showQuestion state
     }
   };
+  
 
   const handleAnswerSubmit = () => {
     if (parseInt(answer) === 2) {
@@ -122,6 +118,28 @@ function Greeting() {
         {showQuestion && (
           <div>
             <p>What is 1+1?</p>
+            <input
+              type="text"
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+            />
+            <button onClick={handleAnswerSubmit}>Submit</button>
+          </div>
+        )}
+        {showQuestion2 && (
+          <div>
+            <p>What is 2+2?</p> {/* Second question */}
+            <input
+              type="text"
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+            />
+            <button onClick={handleAnswerSubmit}>Submit</button>
+          </div>
+        )}
+        {showQuestion3 && (
+          <div>
+            <p>What is 3+3?</p> {/* Third question */}
             <input
               type="text"
               value={answer}
