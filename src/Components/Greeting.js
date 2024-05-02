@@ -2,17 +2,20 @@ import React, { useState } from 'react';
 import song from './bruno.mp3';
 
 function Greeting() {
-  const [showWelcome, setShowWelcome] = useState(false);
   const [sheinClicked, setSheinClicked] = useState(false);
   const [buyMeClicked, setBuyMeClicked] = useState(false);
   const [cultBeautyClicked, setCultBeautyClicked] = useState(false);
+  const [showQuestion, setShowQuestion] = useState(false);
+  const [answer, setAnswer] = useState('');
+  const [correctAnswer, setCorrectAnswer] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleTicketClick = (ticket) => {
-    setShowWelcome(true);
+    if (ticket === 'shein') {
+      setShowQuestion(true);
+      return;
+    }
     switch (ticket) {
-      case 'shein':
-        setSheinClicked(!sheinClicked);
-        break;
       case 'buyMe':
         setBuyMeClicked(!buyMeClicked);
         break;
@@ -23,6 +26,20 @@ function Greeting() {
         break;
     }
   };
+
+  const handleAnswerSubmit = () => {
+    if (parseInt(answer) === 2) {
+      setSheinClicked(true);
+      setCorrectAnswer(true);
+      setShowQuestion(false); // Hide the question and input box
+      setShowWelcome(true); // Show the birthday message
+    } else {
+      setCorrectAnswer(false);
+    }
+    setSubmitted(true);
+  };
+
+  const [showWelcome, setShowWelcome] = useState(false); // State for showing birthday message
 
   return (
     <div style={{ position: "relative", zIndex: 2 }}>
@@ -47,6 +64,10 @@ function Greeting() {
 
           .ticketImage:hover {
             transform: scale(1.1); /* Increase size on hover */
+          }
+
+          .audio-controls {
+            margin-top: 40px; /* Increase spacing between audio controls and icons */
           }
         `}
       </style>
@@ -74,11 +95,33 @@ function Greeting() {
           />
         </div>
       </div>
-      {showWelcome && <p>🎈 ʜᴀᴘᴘʏ ʙɪʀᴛʜᴅᴀʏ︎︎ 🎈 </p>}
 
-      <audio controls autoPlay={true} width="50" height="50">
+      <div>
+        {showQuestion && (
+          <div>
+            <p>What is 1+1?</p>
+            <input
+              type="text"
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+            />
+            <button onClick={handleAnswerSubmit}>Submit</button>
+          </div>
+        )}
+        {submitted && !correctAnswer && (
+          <p>Sorry, wrong answer. Try again.</p>
+        )}
+      </div>
+
+      <audio controls autoPlay={true} width="50" height="50" className="audio-controls">
         <source src={song} type="audio/mp3"></source>
       </audio>
+
+      {showWelcome && (
+        <p>
+          🎈 ʜᴀᴘᴘʏ ʙɪʀᴛʜᴅᴀʏ︎︎ 🎈 <br /> ˚ ༘ ೀ⋆.˚✨🥂♡ ༘*˚ ༘ ೀ⋆.˚
+        </p>
+      )}
     </div>
   );
 }
