@@ -14,6 +14,7 @@ function Greeting() {
   const [correctAnswer, setCorrectAnswer] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [showWelcome, setShowWelcome] = useState(false); // State for showing birthday message
+  const [showWrongAnswer, setShowWrongAnswer] = useState(false);
 
   useEffect(() => {
     let timeout;
@@ -24,6 +25,16 @@ function Greeting() {
     }
     return () => clearTimeout(timeout);
   }, [showWelcome]);
+
+  useEffect(() => {
+    let timeout;
+    if (showWrongAnswer) {
+      timeout = setTimeout(() => {
+        setShowWrongAnswer(false);
+      }, 3000); // Disappear after 3 seconds
+    }
+    return () => clearTimeout(timeout);
+  }, [showWrongAnswer]);
 
   const handleTicketClick = (ticket) => {
     if (ticket === 'shein' && !sheinClicked) {
@@ -54,8 +65,9 @@ const handleAnswerSubmit = (ticket) => {
     setShowWelcome(true); // Show the birthday message
   } else {
     setCorrectAnswer(false);
+    setShowWrongAnswer(true)
+    setSubmitted(true);
   }
-  setSubmitted(true);
 };
 
 
@@ -161,7 +173,7 @@ const handleAnswerSubmit = (ticket) => {
             <button onClick={() => handleAnswerSubmit('cultBeauty')}>Submit</button>
           </div>
         )}
-        {submitted && !correctAnswer && (
+        {submitted && !correctAnswer && showWrongAnswer && (
           <p>Sorry, wrong answer. Try again.</p>
         )}
       </div>
