@@ -8,7 +8,9 @@ function Greeting() {
   const [showQuestion, setShowQuestion] = useState(false);
   const [showQuestion2, setShowQuestion2] = useState(false); // New state for second question
   const [showQuestion3, setShowQuestion3] = useState(false); // New state for third question
-  const [answer, setAnswer] = useState('');
+  const [answer1, setAnswer1] = useState(''); // Separate state for question 1
+  const [answer2, setAnswer2] = useState(''); // Separate state for question 2
+  const [answer3, setAnswer3] = useState(''); // Separate state for question 3
   const [correctAnswer, setCorrectAnswer] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [showWelcome, setShowWelcome] = useState(false); // State for showing birthday message
@@ -35,20 +37,20 @@ function Greeting() {
   
 
 const handleAnswerSubmit = (ticket) => {
-  if ( ticket === 'shein' && parseInt(answer) === 2) {
+  if ( ticket === 'shein' && parseInt(answer1) === 2) {
     setSheinClicked(true);
     setCorrectAnswer(true);
     setShowQuestion(false); // Hide the question and input box
     setShowWelcome(true); // Show the birthday message
-  } else if ( ticket === 'buyMe' && parseInt(answer) === 4) {
+  } else if ( ticket === 'buyMe' && parseInt(answer2) === 4) {
     setBuyMeClicked(true);
     setCorrectAnswer(true);
-    setShowQuestion(false); // Hide the question and input box
+    setShowQuestion2(false); // Hide the question and input box
     setShowWelcome(true); // Show the birthday message
-  } else if (ticket === 'cultBeauty' && parseInt(answer) === 6) {
+  } else if (ticket === 'cultBeauty' && parseInt(answer3) === 6) {
     setCultBeautyClicked(true);
     setCorrectAnswer(true);
-    setShowQuestion(false); // Hide the question and input box
+    setShowQuestion3(false); // Hide the question and input box
     setShowWelcome(true); // Show the birthday message
   } else {
     setCorrectAnswer(false);
@@ -131,8 +133,8 @@ const handleAnswerSubmit = (ticket) => {
             <p>What is 1+1?</p>
             <input
               type="text"
-              value={answer}
-              onChange={(e) => setAnswer(e.target.value)}
+              value={answer1}
+              onChange={(e) => setAnswer1(e.target.value)}
             />
             <button onClick={() => handleAnswerSubmit('shein')}>Submit</button>
           </div>
@@ -142,8 +144,8 @@ const handleAnswerSubmit = (ticket) => {
             <p>What is 2+2?</p> {/* Second question */}
             <input
               type="text"
-              value={answer}
-              onChange={(e) => setAnswer(e.target.value)}
+              value={answer2}
+              onChange={(e) => setAnswer2(e.target.value)}
             />
             <button onClick={() => handleAnswerSubmit('buyMe')}>Submit</button>
           </div>
@@ -153,8 +155,8 @@ const handleAnswerSubmit = (ticket) => {
             <p>What is 3+3?</p> {/* Third question */}
             <input
               type="text"
-              value={answer}
-              onChange={(e) => setAnswer(e.target.value)}
+              value={answer3}
+              onChange={(e) => setAnswer3(e.target.value)}
             />
             <button onClick={() => handleAnswerSubmit('cultBeauty')}>Submit</button>
           </div>
