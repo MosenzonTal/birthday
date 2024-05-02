@@ -26,7 +26,7 @@ function Login() {
     if (authentication() === false) {
       alert("Wrong password, Please try again. ");
     } else {
-      alert("That's Right !!! \nHappy Birthday Baby !!!");
+      alert("That's Right !!! Happy Birthday Baby !!! \nClick OK to continue...");
       setAutentication(true); // Set authentication to true
     }
   }

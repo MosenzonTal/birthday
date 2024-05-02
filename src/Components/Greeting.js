@@ -31,7 +31,7 @@ function Greeting() {
     if (showWrongAnswer) {
       timeout = setTimeout(() => {
         setShowWrongAnswer(false);
-      }, 3000); // Disappear after 3 seconds
+      }, 3000); // Disappear after 2 seconds
     }
     return () => clearTimeout(timeout);
   }, [showWrongAnswer]);
