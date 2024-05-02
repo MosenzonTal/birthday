@@ -11,7 +11,7 @@ function Greeting() {
   const [submitted, setSubmitted] = useState(false);
 
   const handleTicketClick = (ticket) => {
-    if (ticket === 'shein') {
+    if (ticket === 'shein' && !sheinClicked) {
       setShowQuestion(true);
       return;
     }
