@@ -16,14 +16,14 @@ function Greeting() {
     if (showWelcome) {
       timeout = setTimeout(() => {
         setShowWelcome(false);
-      }, 5000); // 3 seconds
+      }, 7000); // 7 seconds
     }
     return () => clearTimeout(timeout);
   }, [showWelcome]);
 
   const handleTicketClick = (ticket) => {
     if (ticket === 'shein' && !sheinClicked) {
-      setShowQuestion(true);
+      setShowQuestion(prevState => !prevState); // Toggle the showQuestion state
       return;
     }
     switch (ticket) {
