@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import song from './bruno.mp3';
 
 function Greeting() {
@@ -9,6 +9,17 @@ function Greeting() {
   const [answer, setAnswer] = useState('');
   const [correctAnswer, setCorrectAnswer] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(false); // State for showing birthday message
+
+  useEffect(() => {
+    let timeout;
+    if (showWelcome) {
+      timeout = setTimeout(() => {
+        setShowWelcome(false);
+      }, 5000); // 3 seconds
+    }
+    return () => clearTimeout(timeout);
+  }, [showWelcome]);
 
   const handleTicketClick = (ticket) => {
     if (ticket === 'shein' && !sheinClicked) {
@@ -39,8 +50,6 @@ function Greeting() {
     setSubmitted(true);
   };
 
-  const [showWelcome, setShowWelcome] = useState(false); // State for showing birthday message
-
   return (
     <div style={{ position: "relative", zIndex: 2 }}>
       <style>
@@ -68,6 +77,19 @@ function Greeting() {
 
           .audio-controls {
             margin-top: 40px; /* Increase spacing between audio controls and icons */
+          }
+
+          .birthday-message {
+            animation: fadeOut 3s forwards;
+          }
+
+          @keyframes fadeOut {
+            0% {
+              opacity: 1;
+            }
+            100% {
+              opacity: 0;
+            }
           }
         `}
       </style>
@@ -118,7 +140,7 @@ function Greeting() {
       </audio>
 
       {showWelcome && (
-        <p>
+        <p className="birthday-message">
           🎈 ʜᴀᴘᴘʏ ʙɪʀᴛʜᴅᴀʏ︎︎ 🎈 <br /> ˚ ༘ ೀ⋆.˚✨🥂♡ ༘*˚ ༘ ೀ⋆.˚
         </p>
       )}
