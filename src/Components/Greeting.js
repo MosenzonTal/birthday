@@ -34,17 +34,28 @@ function Greeting() {
   };
   
 
-  const handleAnswerSubmit = () => {
-    if (parseInt(answer) === 2) {
-      setSheinClicked(true);
-      setCorrectAnswer(true);
-      setShowQuestion(false); // Hide the question and input box
-      setShowWelcome(true); // Show the birthday message
-    } else {
-      setCorrectAnswer(false);
-    }
-    setSubmitted(true);
-  };
+const handleAnswerSubmit = (ticket) => {
+  if ( ticket === 'shein' && parseInt(answer) === 2) {
+    setSheinClicked(true);
+    setCorrectAnswer(true);
+    setShowQuestion(false); // Hide the question and input box
+    setShowWelcome(true); // Show the birthday message
+  } else if ( ticket === 'buyMe' && parseInt(answer) === 4) {
+    setBuyMeClicked(true);
+    setCorrectAnswer(true);
+    setShowQuestion(false); // Hide the question and input box
+    setShowWelcome(true); // Show the birthday message
+  } else if (ticket === 'cultBeauty' && parseInt(answer) === 6) {
+    setCultBeautyClicked(true);
+    setCorrectAnswer(true);
+    setShowQuestion(false); // Hide the question and input box
+    setShowWelcome(true); // Show the birthday message
+  } else {
+    setCorrectAnswer(false);
+  }
+  setSubmitted(true);
+};
+
 
   return (
     <div style={{ position: "relative", zIndex: 2 }}>
@@ -123,7 +134,7 @@ function Greeting() {
               value={answer}
               onChange={(e) => setAnswer(e.target.value)}
             />
-            <button onClick={handleAnswerSubmit}>Submit</button>
+            <button onClick={() => handleAnswerSubmit('shein')}>Submit</button>
           </div>
         )}
         {showQuestion2 && (
@@ -134,7 +145,7 @@ function Greeting() {
               value={answer}
               onChange={(e) => setAnswer(e.target.value)}
             />
-            <button onClick={handleAnswerSubmit}>Submit</button>
+            <button onClick={() => handleAnswerSubmit('buyMe')}>Submit</button>
           </div>
         )}
         {showQuestion3 && (
@@ -145,7 +156,7 @@ function Greeting() {
               value={answer}
               onChange={(e) => setAnswer(e.target.value)}
             />
-            <button onClick={handleAnswerSubmit}>Submit</button>
+            <button onClick={() => handleAnswerSubmit('cultBeauty')}>Submit</button>
           </div>
         )}
         {submitted && !correctAnswer && (
