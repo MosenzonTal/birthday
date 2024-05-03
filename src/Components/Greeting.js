@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import song from './bruno.mp3';
+import goodResultSound from './goodresult.mp3';
 
 function Greeting() {
   const [sheinClicked, setSheinClicked] = useState(false);
@@ -15,6 +16,7 @@ function Greeting() {
   const [submitted, setSubmitted] = useState(false);
   const [showWelcome, setShowWelcome] = useState(false); // State for showing birthday message
   const [showWrongAnswer, setShowWrongAnswer] = useState(false);
+  const [playGoodResultSound, setPlayGoodResultSound] = useState(false);
 
   useEffect(() => {
     let timeout;
@@ -46,6 +48,16 @@ function Greeting() {
     }
   };
   
+  useEffect(() => {
+    if (correctAnswer && submitted) {
+      setPlayGoodResultSound(true);
+      const audio = new Audio(goodResultSound);
+      audio.play();
+      setTimeout(() => {
+        setPlayGoodResultSound(false);
+      }, audio.duration * 1000); // Wait for audio to finish playing
+    }
+  }, [correctAnswer, submitted]);
 
 const handleAnswerSubmit = (ticket) => {
   if ( ticket === 'shein' && parseInt(answer1) === 2) {
