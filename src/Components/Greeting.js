@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import song from './bruno.mp3';
-import goodResultSound from './goodresult.mp3';
+import goodResultSound from './goodresult.mp3'; // Import the good result sound file
+
 
 function Greeting() {
   const [sheinClicked, setSheinClicked] = useState(false);
@@ -18,12 +19,13 @@ function Greeting() {
   const [showWrongAnswer, setShowWrongAnswer] = useState(false);
   const [playGoodResultSound, setPlayGoodResultSound] = useState(false);
 
+
   useEffect(() => {
     let timeout;
     if (showWelcome) {
       timeout = setTimeout(() => {
         setShowWelcome(false);
-      }, 7000); // 7 seconds
+      }, 4000); // 3 seconds
     }
     return () => clearTimeout(timeout);
   }, [showWelcome]);
@@ -38,6 +40,8 @@ function Greeting() {
     return () => clearTimeout(timeout);
   }, [showWrongAnswer]);
 
+
+
   const handleTicketClick = (ticket) => {
     if (ticket === 'shein' && !sheinClicked) {
       setShowQuestion(prevState => !prevState); // Toggle the showQuestion state
@@ -49,15 +53,17 @@ function Greeting() {
   };
   
   useEffect(() => {
-    if (correctAnswer && submitted) {
-      setPlayGoodResultSound(true);
+    let timeout;
+    if (playGoodResultSound) {
       const audio = new Audio(goodResultSound);
       audio.play();
-      setTimeout(() => {
-        setPlayGoodResultSound(false);
-      }, audio.duration * 1000); // Wait for audio to finish playing
+      timeout = setTimeout(() => {
+        setPlayGoodResultSound(false); // Reset state after sound finishes playing
+      }, audio.duration * 1000); // Set timeout based on audio duration
     }
-  }, [correctAnswer, submitted]);
+    return () => clearTimeout(timeout);
+  }, [playGoodResultSound]);
+  
 
 const handleAnswerSubmit = (ticket) => {
   if ( ticket === 'shein' && parseInt(answer1) === 2) {
@@ -65,16 +71,19 @@ const handleAnswerSubmit = (ticket) => {
     setCorrectAnswer(true);
     setShowQuestion(false); // Hide the question and input box
     setShowWelcome(true); // Show the birthday message
+    setPlayGoodResultSound(true); // Set to play the good result sound
   } else if ( ticket === 'buyMe' && parseInt(answer2) === 4) {
     setBuyMeClicked(true);
     setCorrectAnswer(true);
     setShowQuestion2(false); // Hide the question and input box
     setShowWelcome(true); // Show the birthday message
+    setPlayGoodResultSound(true); // Set to play the good result sound
   } else if (ticket === 'cultBeauty' && parseInt(answer3) === 6) {
     setCultBeautyClicked(true);
     setCorrectAnswer(true);
     setShowQuestion3(false); // Hide the question and input box
     setShowWelcome(true); // Show the birthday message
+    setPlayGoodResultSound(true); // Set to play the good result sound
   } else {
     setCorrectAnswer(false);
     setShowWrongAnswer(true)
