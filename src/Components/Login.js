@@ -7,8 +7,8 @@ import Greeting from "./Greeting";
 
 function Login() {
   const ConnectDetils = {
-    username: "linoy",
-    password: "1234",
+    username: "moshessohn",
+    password: "pumhckv",
   };
 
   const [username, checkUsername] = React.useState("");

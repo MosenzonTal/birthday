@@ -185,7 +185,7 @@ const handleAnswerSubmit = (ticket) => {
         )}
         {showQuestion3 && (
           <div>
-            <p>What is 3+3?</p> {/* Third question */}
+            <p>בפעם הקודמת מצאת את הסיסמה לאתר שהכנתי לך. ״פרצת״ הייתה חכמה גדולה. כעת תעשי אותו דבר בשביל למצוא את הדרך לפתוח את המתנה לבד</p> {/* Third question */}
             <input
               type="text"
               value={answer3}
