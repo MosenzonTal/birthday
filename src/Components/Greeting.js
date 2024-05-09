@@ -66,19 +66,19 @@ function Greeting() {
   
 
 const handleAnswerSubmit = (ticket) => {
-  if ( ticket === 'shein' && parseInt(answer1) === 2) {
+  if ( ticket === 'shein' && answer1 === "WhatAMess!") {
     setSheinClicked(true);
     setCorrectAnswer(true);
     setShowQuestion(false); // Hide the question and input box
     setShowWelcome(true); // Show the birthday message
     setPlayGoodResultSound(true); // Set to play the good result sound
-  } else if ( ticket === 'buyMe' && parseInt(answer2) === 4) {
+  } else if ( ticket === 'buyMe' && answer2 === "spaceBALLS") {
     setBuyMeClicked(true);
     setCorrectAnswer(true);
     setShowQuestion2(false); // Hide the question and input box
     setShowWelcome(true); // Show the birthday message
     setPlayGoodResultSound(true); // Set to play the good result sound
-  } else if (ticket === 'cultBeauty' && parseInt(answer3) === 6) {
+  } else if (ticket === 'cultBeauty' && answer3 === "iamProgrammer") {
     setCultBeautyClicked(true);
     setCorrectAnswer(true);
     setShowQuestion3(false); // Hide the question and input box
@@ -163,7 +163,9 @@ const handleAnswerSubmit = (ticket) => {
       <div>
         {showQuestion && (
           <div>
-            <p>What is 1+1?</p>
+            <p>Your closet is a mess isn't it❓🧺 <br></br>
+                Why don't we use it to hide the first password there? 🔐 <br></br>
+                GO find it ❗❗</p>
             <input
               type="text"
               value={answer1}
@@ -174,7 +176,10 @@ const handleAnswerSubmit = (ticket) => {
         )}
         {showQuestion2 && (
           <div>
-            <p>What is 2+2?</p> {/* Second question */}
+            <p>Search the Spaceball game app in your phone.  <br></br> 
+             My record is 60,157 🚀🔝 <br></br> 
+             if you pass *at least* half of it (30,078)   <br></br>
+               you will get the gift. 🎁 </p> {/* Second question */}
             <input
               type="text"
               value={answer2}
@@ -185,7 +190,9 @@ const handleAnswerSubmit = (ticket) => {
         )}
         {showQuestion3 && (
           <div>
-            <p>בפעם הקודמת מצאת את הסיסמה לאתר שהכנתי לך. ״פרצת״ הייתה חכמה גדולה. כעת תעשי אותו דבר בשביל למצוא את הדרך לפתוח את המתנה לבד</p> {/* Third question */}
+          <p>Last time you found the password to the site I prepared for you. Remember? 😡<br></br> 
+          Now do the same to find the way to open the gift yourself. <br></br>  Good Luck 🫡
+          </p>
             <input
               type="text"
               value={answer3}
